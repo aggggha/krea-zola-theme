@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ config.description }}">
+
+  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Page navbar -->
+  <nav class="krea-nav">
+    <div class="grid nav-layout grid-5 krea-container">
+      {% block nav %}
+      {% for menu_link in config.extra.krea_menu %}
+      <a href="{{ config.base_url }}{{ menu_link.url }}">{{ menu_link.name}}</a>
+      {% endfor %}
+      {% endblock nav %}
+    </div>
+  </nav>
+
+  <!-- Page content holder -->
+  {% block content %}{% endblock content %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="krea-container footer">
+      <a href="/"><img src="{{ get_url(path="images/logo.png") }}" alt="Designed by Agha Pradipta"></a>
+      <p>
+        &copy; 2021 Agha Pradipta
+      </p>
+    </div>
+  </footer>
+
+  <div class="imagebox">
+    <div class="cover"></div>
+    <figure>
+      <img src="" alt="">
+    </figure>
+  </div>
+  <script src="/js.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% block content %}
+<section class="page-post main">
+  <div class="cover">
+    {% if page.extra.cover %}
+    <img src="{{ page.extra.cover }}" alt="{{ page.title }}" />
+    {% endif %}
+  </div>
+
+  <div class="title">
+    <div class="date-tags">
+      {% if page.taxonomies.tags %}
+      {% for tag in page.taxonomies.tags %}
+      <a href="#" class="tag">{{ tag }}</a>
+      {%- if loop.index != page.taxonomies.tags | length and page.taxonomies.tags | length > 1 -%}, {%- endif -%}
+      {% endfor %}
+      {% endif %}
+      <div class="date">— {{ page.date | date(format="%B %d, %Y") }} • {{ page.reading_time }} min read</div>
+      <h1>{{ page.title }}</h1>
+      {% if page.extra.headline %}<p class="headline">{{ page.extra.headline }}</p>{% endif %}
+    </div>
+  </div>
+
+  <article>
+    {{ page.content | safe }}
+  </article>
+
+  <div class="footer-menu">
+    <div class="inner">
+      <div class="share-social">
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | replace(from=' ', to='+') }}+{{ page.permalink }}"target="_blank"><img src="{{ get_url(path="images/twitter-64.png") }}" alt="twitter icon" /></a>
+        <a href="{{ page.permalink }}" target="_blank"><img src="{{ get_url(path="images/link-64.png") }}" alt="link icon" /></a>
+      </div>
+      {% if page.earlier or page.later %}
+        {% if page.earlier %}
+        <a href="{{ page.earlier.permalink }}" class="next-prev">
+          <img src="{{ get_url(path="images/arrow-64.png") }}" alt="arrow-icon" />
+          Earlier post
+        </a>
+        {% endif %}
+        {% if page.later %}
+          <a href="{{ page.later.permalink }}" class="next-prev {% if page.earlier and page.later %}both{% else %}prev{% endif %}">
+            Older post
+            <img src="{{ get_url(path="images/arrow-64.png") }}" alt="arrow-icon" />
+          </a>
+        {% endif %}
+      {% endif %}
+      {% if page.updated %}
+      <p>Last update: {{ page.updated | date(format="%B %d, %Y") }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock content %}

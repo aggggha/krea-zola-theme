@@ -1,0 +1,41 @@
+{% macro list(page, i) %}
+<!-- <div class="inner {% if i == 1 %}first-row grid first-row-layout grid-4{% endif %}"> -->
+  <a href="{{ page.permalink }}" class="img-grid-container">
+    {% if page.extra.cover %}
+      <img src="{{ page.extra.cover }}" alt="{{ page.title }}" />
+    {% else %}
+      <img src="{{ get_url(path="images/cover.png") }}" alt="{{ page.title }}" />
+    {% endif %}
+  </a>
+  <div class="title">
+    <div class="title-inner">
+      <div class="date-tags">
+        {% if page.taxonomies.tags %}             
+          {% for tag in page.taxonomies.tags -%}
+            <a href="#" class="tag">{{ tag }}</a>
+            {%- if loop.index == 1 and page.taxonomies.tags | length > 1 -%}, {%- endif -%}
+            {% if loop.index == 2 %}{% break %}{% endif %}
+          {% endfor -%}
+        {% endif %}
+        <div class="date">— {{ page.date | date(format="%B %d, %Y") }}</div>
+      </div>
+      <h2>
+        {% if i == 1 %}
+        <a href="{{ page.permalink }}" {% if page.title | length > 50 %}title="{{ page.title }}"{% endif %}>{{ page.title | title }}</a></h2>
+        {% else %}
+        <a href="{{ page.permalink }}" {% if page.title | length > 50 %}title="{{ page.title }}"{% endif %}>{{ page.title | title | truncate(length=50)}}</a></h2>
+        {% endif %}
+      <p>
+        {% if i == 1 %}
+        {{ page.content | safe | striptags | truncate(length=200)}}</p>
+        {% else %}
+        {{ page.content | safe | striptags | truncate(length=100)}}</p>          
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endmacro list %}
+
+{% macro pagination(paginator) %}
+  <a href="{{ paginator.next }}" data-total-page="{{ paginator.total_pages / paginator.paginate_by }}" class="load-more-btn">Load more</a>
+{% endmacro pagination %}

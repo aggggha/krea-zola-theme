@@ -1,0 +1,34 @@
+{% import "macros/pagination.html" as macros %}
+{% extends "base.html" %}
+
+
+<main>
+  {% block content %}
+  <div class="krea-container main">
+    <div class="grid grid-4 home-layout">
+      {% if paginator.pages %}
+        {% for page in paginator.pages %}
+          {% if loop.index == 1 and paginator.current_index == 1 %}
+            <b class="section">Highlight.</b>
+            <div class="inner first-row grid first-row-layout grid-4">
+          {% else %}
+            {% if loop.index == 2 %}<b class="section second-row">Stories.</b>{% endif %}
+            <div class="inner">
+          {% endif %}
+          {{ macros::list(page=page, i=loop.index) }}
+        {% endfor %}
+      </div>
+      {{ macros::pagination(paginator=paginator) }}
+      {% else %}
+        {% for page in section.pages %}
+          {% if loop.index == 1 %}
+            {% continue %}
+          {% else %}
+            {{ macros::list(page=page, i=loop.index) }}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+  </div>
+  {% endblock content %}
+</main>

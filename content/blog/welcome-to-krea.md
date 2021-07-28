@@ -3,15 +3,15 @@ date = 2021-07-25T17:05:00Z
 title = "Welcome to Krea Theme for Zola"
 updated = 2021-07-25T17:07:00Z
 [extra]
-headline = "Hi! A theme built on top of Zola. This theme was created during the COVID-19 pandemic (a.k.a Spending boring time during self-quarantine). Krea introduces a grid layout view on its homepage and bunch of other feature. Pssstttt… Krea really likes loading pictures."
+headline = "Hi! Krea is a theme for Zola. Krea introduces a grid layout view on its homepage and bunch of other feature. Pssstttt… Krea really likes loading pictures."
 +++
 
-What you just read is one of Krea's features, namely **Headline**. Headlines allow you to write down what you want to emphasize in a blog post. Headlines are added to the `*.md` document that you save in the `/content` directory. To add it, simply write the variable `headline` after the line `[extra]` in the front matter setting of the blog post content you want to publish. Not only Headlines, Krea offers the following features:
+What you just read is one of Krea's features, namely **Headline**. Headlines allow you to write down what you want to emphasize in a blog post. Headlines are added to the `*.md` document that you save in the `/content` directory. To add it, simply write `headline`  variable after `[extra]` in the front matter setting of the blog post content you want to publish. 
 
 <!-- more -->
 
 ## Cover Image
-Just like Headlines, you can add this feature to the front matter of the content document. The cover image will appear on the homepage, it will also appear at the very top of the post page. Cover images can be added via image url from the internet or from images stored in the `static` directory. For example:
+Just like Headlines, you can add this feature to the front matter of the content document. The cover image will appear on the homepage, it will also appear at the very top of the post page. Cover images can be added via image url from the internet or files stored in the `static` directory. For example:
 
 ```js
 [extra]
@@ -21,7 +21,7 @@ cover = "https://source.unsplash.com/random"
 ```
 
 ## Tags
-You can also add tags via the front matter `[taxonomies]` followed by `tags` in an array format. Tags can contain more than one tag. For example:
+You can also add tags via the front matter `[taxonomies]` followed by `tags` in an array format. Tags can contains more than one tag. For example:
 
 ```js
 [taxonomies]
@@ -32,7 +32,7 @@ Please note that, on homepage only first two tag will be displayed.
 
 ## Images
 
-With krea you can insert image using the old way:
+Krea loves image, with Krea you can insert image using the old way:
 
 ```js
 ![Some random image from unsplash](https://source.unsplash.com/random/800x480)
@@ -40,7 +40,7 @@ With krea you can insert image using the old way:
 
 ![Some random image from unsplash](https://source.unsplash.com/random/800x480)
 
-or, you can insert using HTML tag as usual. Even more, you can customise how it looks on this page using class `.expanded`, `.small` or `.wrapped`. That first image is default sizing for image. 
+or, you can insert using HTML tag as usual. Even more, you can customize how it looks on this page using `.expanded`, `.small` or `.wrapped` class. That first image is default sizing for image.
 
 <img src="https://source.unsplash.com/random/800x480" alt="Using .expanded class" class="expanded" />
 
@@ -52,7 +52,7 @@ Using .small
 
 <img src="https://source.unsplash.com/random/800x480" alt="Using .small class" class="small" />
 
-You don't need to worry about caption and `<figure>` tag, Krea handle it for you. 
+You don't need to worry about caption and `<figure>` tag, Krea handle it for you and also those images are clickable. 
 
 ## Some Other Basic Feature
 
@@ -185,19 +185,3 @@ $$
 \BinaryInfC{D}
 \end{prooftree}
 $$
-
-### Known Issues
-
-When you adding images using `img` tag only, image viewer won't triggered. For example everything works just fine using `<figure>`, image and `<figcaption>`.
-
-```
-<figure>
-  <img src="https://source.unsplash.com/random/800x480" alt="Example" />
-  <figcaption>Caption</figcaption>
-</figure>
-```
-
-<figure>
-  <img src="https://source.unsplash.com/random/800x480" alt="Example" />
-  <figcaption>Caption</figcaption>
-</figure>

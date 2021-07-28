@@ -21,7 +21,7 @@
   <nav class="krea-nav">
     <div class="grid nav-layout grid-5 krea-container">
       {% block nav %}
-      {% for menu_link in config.extra.krea_menu %}
+      {% for menu_link in config.extra.krea_menu_links %}
       <a href="{{ config.base_url }}{{ menu_link.url }}">{{ menu_link.name}}</a>
       {% endfor %}
       {% endblock nav %}

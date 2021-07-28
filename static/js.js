@@ -7,28 +7,30 @@ const imageBoxElement = document.querySelector('.imagebox');
 window.addEventListener('DOMContentLoaded', function () {
     // Surrounding img into figure for better accessibility
     imgElem.forEach(img => {
-        console.log(img);
-        let createFigure = img.parentElement;
-        if (createFigure.tagName !== 'FIGURE') {
-            if (createFigure.tagName !== 'ARTICLE') {
-                createFigure.outerHTML = `
-                    <figure>
-                        ${img.outerHTML}
-                        <figcaption>${img.getAttribute('alt')}</figcaption>
-                    </figure>
-                `;
+        let tempImg = img.cloneNode();
+        let createFigure = document.createElement('figure');
+        let createFigCaption = document.createElement('figcaption');
+        if (img.parentNode.tagName !== 'FIGURE') {
+            if (img.parentNode.tagName !== 'ARTICLE') {
+                createFigure.classList.add(img.getAttribute('class'));
+                img.parentNode.insertAdjacentElement("afterend", createFigure);
+                createFigure.append(img);
+                createFigCaption.innerHTML = img.getAttribute('alt');
+                createFigure.append(createFigCaption);
+                createFigure.previousSibling.remove();
             } else {
-                img.outerHTML = `
-                    <figure class='${img.getAttribute('class')}'>
-                        ${img.outerHTML}
-                        <figcaption>${img.getAttribute('alt')}</figcaption>
-                    </figure>
-                `;
+                createFigure.classList.add(img.getAttribute('class'));
+                img.insertAdjacentElement("beforebegin", createFigure);
+                createFigure.append(img);
+                createFigCaption.innerHTML = img.getAttribute('alt');
+                createFigure.append(createFigCaption);
             }
         }
         img.classList.remove(img.getAttribute('class'));
+    });
 
-
+    // Image viewer
+    imgElem.forEach(img => {
         img.addEventListener('click', function () {
             imageBoxElement.classList.add('visible');
             imageBoxElement.children[1].children[0].setAttribute('src', this.getAttribute('src'));
@@ -88,21 +90,3 @@ window.addEventListener('DOMContentLoaded', function () {
         page++;
     });
 });
-
-// window.addEventListener('load', function () {
-//     imgElem.forEach(img => {
-//         img.addEventListener('click', function () {
-//             imageBoxElement.classList.add('visible');
-//             imageBoxElement.children[1].children[0].setAttribute('src', this.getAttribute('src'));
-//             imageBoxElement.children[1].children[0].setAttribute('alt', this.getAttribute('alt'));
-//             // imageBoxElement.children[1].children[1].innerHTML = this.parentElement.lastElementChild.innerHTML;
-//             document.querySelector('body').classList.add('no-overflow');
-//         });
-
-//         // close imageBox
-//         imageBoxElement.firstElementChild.addEventListener('click', function () {
-//             this.parentElement.classList.remove('visible');
-//             document.querySelector('body').classList.remove('no-overflow');
-//         });
-//     });
-// });

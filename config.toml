@@ -1,6 +1,10 @@
 # The URL the site will be built for
 base_url = "https://aggggha.github.io"
 
+# The site title and description; used in feeds by default.
+title = "Krea Theme"
+description = "Simple grid-layout theme for Zola"
+
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
@@ -13,6 +17,7 @@ build_search_index = true
 #  {name = "highlight"}
 # ]
 
+# Configuration of the Markdown rendering
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
@@ -21,8 +26,11 @@ highlight_theme = "material-dark"
 
 [extra]
 # Put all your custom variables here
-krea_date_format="%B %d, %Y"
-krea_menu = [
+# You can also put your logo branding to be displayed in footer
+footer_branding_img = ""
+krea_date_format = "%B %d, %Y"
+krea_menu_links = [
+    { url = "/", name = "Home" },
     { url = "/blog", name = "Blog" },
     { url = "/blog/tags", name = "Tags" },
 ]

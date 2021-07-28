@@ -1,0 +1,24 @@
+name = "krea"
+description = "Simple grid-layout theme for Zola"
+license = "MIT"
+homepage = "https://github.com/aggggha/krea-zola-theme"
+
+# The minimum version of Zola required
+min_version = "0.14.0"
+
+# An optional live demo URL
+# To be added
+
+# Any variable there can be overriden in the end user `config.toml`
+# You don't need to prefix variables by the theme name but as this will
+# be merged with user data, some kind of prefix or nesting is preferable
+# Use snake_casing to be consistent with the rest of Zola
+
+[extra]
+krea_date_format = "%B %d, %Y"
+krea_menu_links = []
+
+# The theme author info: you!
+[author]
+name = "Agha Pradipta"
+homepage = "https://twitter.com/aggggha"

@@ -21,7 +21,7 @@
   <nav class="krea-nav">
     <div class="grid nav-layout grid-5 krea-container">
       {% block nav %}
-      {% for menu_link in config.extra.krea_menu_links %}
+      {% for menu_link in config.extra.menu_links %}
       <a href="{{ config.base_url }}{{ menu_link.url }}">{{ menu_link.name}}</a>
       {% endfor %}
       {% endblock nav %}
@@ -49,7 +49,9 @@
     </figure>
   </div>
   <script src="/js.js"></script>
+  {% if config.extra.enable_mathjax %}
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</body>
+  {% endif %}
+  </body>
 </html>

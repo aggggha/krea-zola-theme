@@ -12,10 +12,10 @@ compile_sass = true
 build_search_index = true
 
 # Adding taxonomies for additional post attribute
-# taxonomies = [
-#  {name = "tags"},
-#  {name = "highlight"}
-# ]
+taxonomies = [
+    #{name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
 
 # Configuration of the Markdown rendering
 [markdown]
@@ -27,10 +27,12 @@ highlight_theme = "material-dark"
 [extra]
 # Put all your custom variables here
 # You can also put your logo branding to be displayed in footer
+enable_mathjax = true
 footer_branding_img = ""
-krea_date_format = "%B %d, %Y"
-krea_menu_links = [
+date_format = "%B %d, %Y"
+menu_links = [
     { url = "/", name = "Home" },
     { url = "/blog", name = "Blog" },
-    { url = "/blog/tags", name = "Tags" },
+    { url = "/tags", name = "Tags" },
 ]
+

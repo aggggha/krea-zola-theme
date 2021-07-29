@@ -33,6 +33,10 @@ $tertiary-signature-color: #ff0000;
   border-bottom: 1px solid transparent;
 }
 
+%display-inline {
+  display: inline-block;
+}
+
 %default-date-tags {    
   .tag {
     text-transform: capitalize;
@@ -60,6 +64,7 @@ body {
   margin: 0;
   position: relative;
   min-height: 100%;
+  line-height: 1.6;
 
   ::selection, ::-moz-selection {
     background: #80b3ff65;
@@ -113,6 +118,29 @@ body {
 .main {
   min-height: calc(100vh - 441.483px);
   animation: fade-in .3s both;
+
+  &.tags {
+    .bubble {
+      background: $signature-color;
+      padding: 1px 10px;
+      border-radius: 25px;
+      margin: 0 5px;
+      position: relative;
+      bottom: 4px;
+      font-size: .8em;
+      font-weight: bold;
+
+      &.count {
+        @extend %display-inline;
+      }
+    }
+
+    .title {
+      h1 {
+        display: inline-block;
+      }
+    }
+  }
 }
 
 .krea-container {
@@ -148,6 +176,10 @@ body {
         height: 100%;
         object-position: center;
         opacity: .5 !important;
+      }
+
+      .random-image-placeholder {
+        height: 100%;
       }
     }
 
@@ -198,7 +230,7 @@ body {
     animation: fade-in .3s both;
 
     .title {
-      padding: 10px;
+      padding: 20px 0;
 
       .title-inner {
         @extend %default-date-tags;
@@ -222,24 +254,24 @@ body {
     a {
       color: $primary-color;
       border-bottom: none !important;
-      
-      &:active {
-        background: none !important;
-      }
+      background: none !important;
 
       img {
         width: 100%;
+        height: 240px;
         object-fit: cover;
-        object-position: bottom;
+        object-position: center;
         opacity: .8;
+      }
+
+      .random-image-placeholder {
+        height: 240px;
       }
     }
   }
 }
 
 .page-post {
-  line-height: 1.6;
-
   .cover {
     @extend %default-grid-post;
 
@@ -259,11 +291,24 @@ body {
     .date-tags {
       grid-column: 6/11;
       @extend %default-date-tags;
+
+      .tag {
+        border-bottom: none;
+        font-size: .8em;
+
+        &:hover {
+          border-bottom: 1px solid $alternative-signature-color;
+        }
+      }
+
+      .date {
+        font-size: .8em;
+      }
     }
 
     h1 {
-      font-size: 2em;
-      margin: 0;
+      font-size: 2.5em;
+      margin: -5px 0 40px 0;
     }
 
     .headline {
@@ -454,11 +499,6 @@ body {
           height: 32px;
           display: inline-block;
           text-align: center;
-          border-bottom: 1px solid transparent;
-
-          &:hover {
-            border-bottom: 1px solid $alternative-signature-color;
-          }
 
           img {
             width: 16px;
@@ -469,11 +509,19 @@ body {
         }
       }
 
+      a {
+        border-bottom: 1px solid transparent;
+
+          &:hover {
+            border-bottom: 1px solid $alternative-signature-color;
+          }
+      }
+
       .next-prev {
         grid-column: 3/5;
         height: 32px;
         justify-self: center;
-        padding: 3px;
+        padding: 3px 10px;
         margin: 0 5px;
 
         &.both {
@@ -497,7 +545,7 @@ body {
           -webkit-transform: none;
           transform: none;
           width: 16px;
-          margin: -4px 5px 0 6px;
+          margin: -4px 5px 0 5px;
         }
       }
 
@@ -573,7 +621,7 @@ body {
 
 footer {
   background: $secondary-signature-color;
-  padding: 50px;
+  padding: 50px 0;
   margin-top: 80px;
 
   .footer a {

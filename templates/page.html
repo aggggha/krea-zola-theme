@@ -18,8 +18,8 @@
       {%- if loop.index != page.taxonomies.tags | length and page.taxonomies.tags | length > 1 -%}, {%- endif -%}
       {% endfor %}
       {% endif %}
-      <div class="date">— {{ page.date | date(format=config.extra.krea_date_format) }} • {{ page.reading_time }} min read</div>
-      <h1>{{ page.title }}</h1>
+      <div class="date">— {{ page.date | date(format=config.extra.date_format) }} • {{ page.reading_time }} min read</div>
+      <h1>{{ page.title | title}}</h1>
       {% if page.extra.headline %}<p class="headline">{{ page.extra.headline }}</p>{% endif %}
     </div>
   </div>

@@ -4,7 +4,7 @@
     {% if page.extra.cover %}
       <img src="{{ page.extra.cover }}" alt="{{ page.title }}" />
     {% else %}
-      <img src="{{ get_url(path="images/cover.png") }}" alt="{{ page.title }}" />
+      <div class="random-image-placeholder"></div>
     {% endif %}
   </a>
   <div class="title">
@@ -14,7 +14,7 @@
           {% for tag in page.taxonomies.tags -%}
             <a href="#" class="tag">{{ tag }}</a>
             {%- if loop.index == 1 and page.taxonomies.tags | length > 1 -%}, {%- endif -%}
-            {% if loop.index == 2 %}{% break %}{% endif %}
+            {% if loop.index == 2 %}, {{ page.taxonomies.tags | length - 2 }}+{% break %}{% endif %}
           {% endfor -%}
         {% endif %}
         <div class="date">— {{ page.date | date(format="%B %d, %Y") }}</div>

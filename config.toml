@@ -11,10 +11,14 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+# When set to "true", a feed is automatically generated.
+generate_feed = true
+
 # Adding taxonomies for additional post attribute
 taxonomies = [
     #{name = "categories", feed = true},
-    {name = "tags", feed = true},
+    {name = "tags"},
+    {name = "categories"}
 ]
 
 # Configuration of the Markdown rendering
@@ -28,11 +32,25 @@ highlight_theme = "material-dark"
 # Put all your custom variables here
 # You can also put your logo branding to be displayed in footer
 enable_mathjax = true
+enable_reading_time = true
+# Blogger lightbox-like feature
+enable_imagebox = true 
+
 footer_branding_img = ""
+
 date_format = "%B %d, %Y"
 menu_links = [
     { url = "/", name = "Home" },
     { url = "/blog", name = "Blog" },
     { url = "/tags", name = "Tags" },
+    { url = "/categories", name = "Categories" },
+    { url = "/blog", name = "Menu", sub = [
+        { url = "/tags", name = "Sub menu 1"},
+        { url = "/categories", name = "Sub menu 2" },
+    ]},
+    { url = "/blog", name = "Menu", sub = [
+        { url = "/tags", name = "Sub menu 1" },
+        { url = "/categories", name = "Sub menu 2" },
+    ]},
 ]
 

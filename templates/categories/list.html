@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="krea-container main tags">
+<section class="krea-container main categories">
     <div class="title">
-        <h1>Tags</h1>
+        <h1>Categories</h1>
     </div>
-    <div class="tag-list">
-        <div class="tag">
-            <h2 style="display: inline;">#{{ term.name | title }}</h2>
-            <div class="bubble count">{{ term.pages | length }}</div>
+    <div class="categories-list">
+        {%- for categories in terms -%}
+        <div class="categories">
+            <h2 style="display: inline;">{{ categories.name | title }}</h2>
+            <div class="bubble count">{{ categories.pages | length }}</div>
         </div>
         <div class="post">
             <ul>
-                {% for post in term.pages %}
+                {% for post in categories.pages %}
                 <li>
                     <a href="{{ post.permalink }}" style="display: inline;">{{ post.title | title }}</a>
                     <div class="post-date" style="display: inline;">— {{ post.date | date(format=config.extra.date_format) }}</div>
@@ -20,6 +21,7 @@
                 {% endfor %}
             </ul>
         </div>
+        {%- endfor -%}
     </div>
 </section>
 {% endblock content %}

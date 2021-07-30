@@ -19,13 +19,26 @@
 <body>
   <!-- Page navbar -->
   <nav class="krea-nav">
-    <div class="grid nav-layout grid-5 krea-container">
+    <ul class="grid nav-layout grid-5 krea-container">
       {% block nav %}
       {% for menu_link in config.extra.menu_links %}
-      <a href="{{ config.base_url }}{{ menu_link.url }}">{{ menu_link.name}}</a>
+      <li><a href="{{ config.base_url }}{{ menu_link.url }}" class="{% if menu_link.sub %}has-submenu{% endif %}">{{ menu_link.name}}</a>
+        {% if menu_link.sub %}
+        <ul class="nav-layout-sub">
+          {% for submenu in menu_link.sub %}
+          <li>
+            <a href="{{ config.base_url }}{{ submenu.url }}">
+              <div>{{ submenu.name }}</div>
+              <img src="{{ get_url(path="images/arrow-64.png") }}" alt="{{ submenu.name }}" />
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
       {% endfor %}
       {% endblock nav %}
-    </div>
+    </ul>
   </nav>
 
   <!-- Page content holder -->
@@ -49,9 +62,12 @@
     </figure>
   </div>
   <script src="/js.js"></script>
+  {% if config.extra.enable_imagebox %}
+  <script src="/imagebox.js"></script>{% endif %}
   {% if config.extra.enable_mathjax %}
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   {% endif %}
-  </body>
+</body>
+
 </html>

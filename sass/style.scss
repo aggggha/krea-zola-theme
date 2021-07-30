@@ -99,12 +99,22 @@ body {
 
 .krea-nav {
   position: relative;
-  margin: 0 0 50px 0;
   z-index: 9;
 
   a {
     text-decoration: none;
     color: $primary-color;
+    border-bottom: none;
+    padding: 5px 15px;
+    border-radius: 25px;
+
+    &:hover {
+      background: $secondary-signature-color;
+    }
+
+    &:active, &.focus {
+      background: #0066ff65;
+    }
   }
 
   .nav-layout {
@@ -112,14 +122,80 @@ body {
     justify-content: end;
     align-content: center;
     height: 100px;
+    gap: 10px !important;
+
+    li {
+      position: relative;
+      
+      &:before, &::marker {
+        display: none;
+      }
+
+      .nav-layout-sub {
+        display: none;
+        position: absolute;
+        left: 50%;
+        padding: 15px 0;
+        width: 300px;
+        border: 1px solid $quaternary-color;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
+        -webkit-transform: translate(-50%, 20%);
+        transform: translate(-50%, 20%);
+        background: #ffffff;
+
+        &.visible{
+          display: block;
+          animation: drop-fade-in .15s;
+        }
+
+        li {        
+          position: relative;
+          padding: 0 15px;
+
+          a {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-items: end;
+            align-items: center;
+            border-bottom: none;
+            background: transparent;
+            
+            &:hover {
+              color: $alternative-signature-color;
+
+              img {
+                margin: 0;
+                opacity: .8;
+              }
+            }
+
+            div {
+              justify-self: start;
+            }
+
+            img {
+              width: 14px;
+              -webkit-transform: rotate(180deg);
+              transform: rotate(180deg);
+              margin: 0 5px 0 0;
+              transition: .15s;
+              opacity: .5;
+            }
+          }
+        }
+      }
+      
+      
+    }
   }
 }
 
 .main {
-  min-height: calc(100vh - 441.483px);
+  min-height: calc(100vh - 355px);
   animation: fade-in .3s both;
 
-  &.tags {
+  &.tags, &.categories {
     .bubble {
       background: $signature-color;
       padding: 1px 10px;
@@ -645,5 +721,19 @@ footer {
   
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes drop-fade-in {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+  }
+  
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, 20%);
+    transform: translate(-50%, 20%);
   }
 }

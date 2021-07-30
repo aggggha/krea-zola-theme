@@ -14,11 +14,11 @@
     <div class="date-tags">
       {% if page.taxonomies.tags %}
       {% for tag in page.taxonomies.tags %}
-      <a href="#" class="tag">{{ tag }}</a>
+      <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" class="tag">{{ tag }}</a>
       {%- if loop.index != page.taxonomies.tags | length and page.taxonomies.tags | length > 1 -%}, {%- endif -%}
       {% endfor %}
       {% endif %}
-      <div class="date">— {{ page.date | date(format=config.extra.date_format) }} • {{ page.reading_time }} min read</div>
+      <div class="date">— {{ page.date | date(format=config.extra.date_format) }} {% if config.extra.enable_reading_time %} • {{ page.reading_time }} min read{% endif %}</div>
       <h1>{{ page.title | title}}</h1>
       {% if page.extra.headline %}<p class="headline">{{ page.extra.headline }}</p>{% endif %}
     </div>

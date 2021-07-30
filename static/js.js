@@ -1,25 +1,28 @@
 const loadMoreBtn = document.querySelector('.load-more-btn');
 const homeLayoutContainer = document.querySelector('.home-layout');
-const codeWithLineElem = document.querySelectorAll('code table tr');
-const imgElem = document.querySelectorAll('article img');
-const fakeImgElem = document.querySelectorAll('.random-image-placeholder');
+const codeWithLineElems = document.querySelectorAll('code table tr');
+const imgElems = document.querySelectorAll('article img');
+const fakeImgElems = document.querySelectorAll('.random-image-placeholder');
 const imageBoxElement = document.querySelector('.imagebox');
+const navLinks = document.querySelectorAll('.nav-layout a');
+
+// variable for dropdown
+let visibleElement = null;
+let visibleElementLvlN = null;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Reference: https://codepen.io/Luc-Designs/pen/LXxBPg
-    fakeImgElem.forEach(imgElem => {
+    fakeImgElems.forEach(imgElem => {
         let hexColor = createHexColor();
         let hexColor2 = createHexColor();
         let hexColor3 = createHexColor();
         let generatedGradient = `linear-gradient(${Math.floor(Math.random() * 360)}deg, #${hexColor}cc, #${hexColor}00 ${Math.floor(Math.random() * (100 - 60) + 60)}%), linear-gradient(${Math.floor(Math.random() * 360)}deg, #${hexColor2}cc, #${hexColor2}00 ${Math.floor(Math.random() * (100 - 60) + 60)}%), linear-gradient(${Math.floor(Math.random() * 360)}deg, #${hexColor3}cc, #${hexColor3}00 ${Math.floor(Math.random() * (100 - 60) + 60)}%)`;
-        console.log(generatedGradient)
-        
+
         imgElem.style.background = generatedGradient;
     });
 
     // Surrounding img into figure for better accessibility
-    imgElem.forEach(img => {
-        let tempImg = img.cloneNode();
+    imgElems.forEach(img => {
         let createFigure = document.createElement('figure');
         let createFigCaption = document.createElement('figcaption');
         if (img.parentNode.tagName !== 'FIGURE') {
@@ -41,32 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
         img.classList.remove(img.getAttribute('class'));
     });
 
-    // Image viewer
-    imgElem.forEach(img => {
-        img.addEventListener('click', function () {
-            imageBoxElement.classList.add('visible');
-            imageBoxElement.children[1].children[0].setAttribute('src', this.getAttribute('src'));
-            imageBoxElement.children[1].children[0].setAttribute('alt', this.getAttribute('alt'));
-            // imageBoxElement.children[1].children[1].innerHTML = this.parentElement.lastElementChild.innerHTML;
-            document.querySelector('body').classList.add('no-overflow');
-        });
-
-        // close imageBox
-        imageBoxElement.firstElementChild.addEventListener('click', function () {
-            this.parentElement.classList.remove('visible');
-            document.querySelector('body').classList.remove('no-overflow');
-        });
-    });
-
     // Trimming code for better syntax highlight line
-    codeWithLineElem.forEach((item, index) => {
+    codeWithLineElems.forEach((item, index) => {
         item.childNodes.forEach(child => {
             child.innerText === "\n" && item.remove();
-            let startFrom = parseInt(codeWithLineElem[0].firstElementChild.innerHTML);
+            let startFrom = parseInt(codeWithLineElems[0].firstElementChild.innerHTML);
             item.firstElementChild.innerHTML = startFrom + Math.round(index / 2);
         }); // Trimming
     });
-    
+
     // Load more button function on home
     let page = 2;
     let i = 2;
@@ -103,15 +89,40 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Reference: https://stackoverflow.com/a/50775012
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('has-submenu')) {
+        e.preventDefault();
+        document.querySelectorAll('.has-submenu').forEach(item => item.classList.remove('focus'));
+        dropdownHandle(e.target);
+    } else if (visibleElement) {
+        visibleElement.classList.toggle('visible');
+        visibleElement = null;
+        document.querySelectorAll('.has-submenu').forEach(item => item.classList.remove('focus'));
+    }
+});
+
+function dropdownHandle(e) {
+    e.nextElementSibling.classList.toggle('visible');
+    e.classList.toggle('focus');
+
+    if (!visibleElement) {
+        visibleElement = e.nextElementSibling;
+    } else if (visibleElement == e.nextElementSibling) {
+        visibleElement = null;
+    } else {
+        visibleElement.classList.toggle('visible');
+        visibleElement = e.nextElementSibling;
+    }
+}
+
 function createHexColor() {
     let generatedHex = "";
     let hexNum = "0123456789abcdef";
-    
-    for ( var i = 0; i < 6; i++ ) {
+
+    for (var i = 0; i < 6; i++) {
         generatedHex += hexNum.charAt(Math.floor(Math.random() * hexNum.length));
     }
 
-    console.log(generatedHex)
-
     return generatedHex;
-  }
+}

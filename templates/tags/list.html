@@ -9,7 +9,7 @@
     <div class="tag-list">
         {%- for tag in terms -%}
         <div class="tag">
-            <h2 style="display: inline;">{{ tag.name | title }}</h2>
+            <h2 style="display: inline;">#{{ tag.name | title }}</h2>
             <div class="bubble count">{{ tag.pages | length }}</div>
         </div>
         <div class="post">

@@ -2,6 +2,8 @@
 date = 2021-07-25T17:05:00Z
 title = "Welcome to Krea Theme for Zola"
 updated = 2021-07-25T17:07:00Z
+[taxonomies]
+categories = ["welcome"]
 [extra]
 headline = "Hi! Krea is a theme for Zola. Krea introduces a grid layout view on its homepage and bunch of other feature. Pssstttt… Krea really likes loading pictures."
 +++
